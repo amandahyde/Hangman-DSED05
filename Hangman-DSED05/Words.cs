@@ -22,5 +22,9 @@ namespace Hangman_DSED05
         public string word { get; set; }
 
         public string wordguess { get; set; }
+
+        public int Level { get; set; }
     }
+
+
 }

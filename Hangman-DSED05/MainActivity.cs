@@ -4,15 +4,19 @@ using Android.OS;
 using System;
 using Android.Content;
 using Android.Views;
+using System.IO;
 
 namespace Hangman_DSED05
 {
-    [Activity(Label = "Hangman_DSED05", MainLauncher = true,  ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Hangman_DSED05", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
         private Button btnNext;
         private TextView txtName;
-       
+
+
+
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -20,7 +24,7 @@ namespace Hangman_DSED05
 
             base.OnCreate(savedInstanceState);
 
-        
+
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
@@ -29,21 +33,22 @@ namespace Hangman_DSED05
         }
 
 
-       
 
 
-    private void Startup()
+
+        private void Startup()
         {
 
             //bind the variables to layout controls
             txtName = FindViewById<TextView>(Resource.Id.etEnterName);
             btnNext = FindViewById<Button>(Resource.Id.btnNext);
 
-          
-                btnNext.Click += onNext_Click;
 
-            
-       
+
+            btnNext.Click += onNext_Click;
+
+
+
 
         }
 
@@ -60,6 +65,11 @@ namespace Hangman_DSED05
             //start game activity
             StartActivity(gameActivity);
         }
+
+       
+        }
+
     }
-}
+
+
 

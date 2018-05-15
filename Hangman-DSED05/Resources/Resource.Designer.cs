@@ -45,10 +45,34 @@ namespace Hangman_DSED05
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int horrorhangman1 = 2130837504;
+			public const int frenchie = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int noose = 2130837505;
+			public const int hangman2 = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int hangman3 = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int hangman4 = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int hangman5 = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int hangman6 = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int hangmanend = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int hangmanstart = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int horrorhangman1 = 2130837512;
+			
+			// aapt resource value: 0x7f020009
+			public const int noose = 2130837513;
 			
 			static Drawable()
 			{
@@ -65,6 +89,9 @@ namespace Hangman_DSED05
 			
 			// aapt resource value: 0x7f050023
 			public const int IVLogo = 2131034147;
+			
+			// aapt resource value: 0x7f050001
+			public const int ImgDoom = 2131034113;
 			
 			// aapt resource value: 0x7f050004
 			public const int btnA = 2131034116;
@@ -108,8 +135,8 @@ namespace Hangman_DSED05
 			// aapt resource value: 0x7f050012
 			public const int btnN = 2131034130;
 			
-			// aapt resource value: 0x7f050026
-			public const int btnNext = 2131034150;
+			// aapt resource value: 0x7f050027
+			public const int btnNext = 2131034151;
 			
 			// aapt resource value: 0x7f050014
 			public const int btnO = 2131034132;
@@ -153,11 +180,11 @@ namespace Hangman_DSED05
 			// aapt resource value: 0x7f050022
 			public const int button2 = 2131034146;
 			
-			// aapt resource value: 0x7f050025
-			public const int etEnterName = 2131034149;
+			// aapt resource value: 0x7f050026
+			public const int etEnterName = 2131034150;
 			
-			// aapt resource value: 0x7f050001
-			public const int imageView1 = 2131034113;
+			// aapt resource value: 0x7f050024
+			public const int imageView1 = 2131034148;
 			
 			// aapt resource value: 0x7f050002
 			public const int lblShowWord = 2131034114;
@@ -174,8 +201,8 @@ namespace Hangman_DSED05
 			// aapt resource value: 0x7f05001b
 			public const int linearLayout4 = 2131034139;
 			
-			// aapt resource value: 0x7f050024
-			public const int tvEnterName = 2131034148;
+			// aapt resource value: 0x7f050025
+			public const int tvEnterName = 2131034149;
 			
 			// aapt resource value: 0x7f050000
 			public const int txtMessage = 2131034112;

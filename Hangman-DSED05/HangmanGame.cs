@@ -44,11 +44,12 @@ namespace Hangman_DSED05
         private Button Y;
         private Button Z;
 
-
+        private ImageView imgDoom;
 
         private TextView ShowWord;
 
-
+        public int Level = 0;
+        public int Losses = 0;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -60,8 +61,8 @@ namespace Hangman_DSED05
             Name = Intent.GetStringExtra("Name");
 
             txtMessage = FindViewById<TextView>(Resource.Id.txtMessage);
-            txtMessage.Text = "Welcome to the game " + Name;
-            Toast.MakeText(this, "You are " + Name, ToastLength.Long).Show();
+            //txtMessage.Text = "Welcome to the game " + Name;
+            //Toast.MakeText(this, "You are " + Name, ToastLength.Long).Show();
 
             ShowWord = FindViewById<TextView>(Resource.Id.lblShowWord);
 
@@ -92,6 +93,7 @@ namespace Hangman_DSED05
             Y = FindViewById<Button>(Resource.Id.btnY);
             Z = FindViewById<Button>(Resource.Id.btnZ);
 
+            imgDoom = FindViewById<ImageView>(Resource.Id.ImgDoom);
 
             AlphabetLetters();
             LoadWords();
@@ -130,23 +132,43 @@ namespace Hangman_DSED05
 
        public void letter_Click(object sender, EventArgs e)
         {
+
+       
+           
             //make a fake button
             Button fakeBtn = (Button)sender;
 
             if (fakeBtn.Clickable)
+
             {
+
                 for (int i = 0; i < Words.Word.Length; i++)
                 {
                     var Letter = Words.Word[i];
 
                     if (Letter.ToString() == fakeBtn.Text.ToString())
-    
                 {
                         Words.WordGuess[i] = (char)Letter;
 
-
-
                     }
+
+
+
+                    //if (Words.Word.Contains(fakeBtn.Text.ToString())
+               //     METHOD
+                    //        {
+
+                    //}
+                    else
+                    {
+                        ChangeImage();
+                        
+                    }
+
+
+                       
+                   
+    
 
 
                 }
@@ -164,15 +186,87 @@ namespace Hangman_DSED05
         }
 
 
+        public void ChangeImage()
+        {
+            Level++;
+
+            if (Level == 1)
+
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangmanstart);
+            }
+
+            else if (Level == 2)
+
+
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman2);
+            }
+
+            else if (Level == 3)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman3);
+            }
+
+            else if (Level == 4)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman4);
+            }
+
+            else if (Level == 5)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman5);
+            }
+            else if (Level == 6)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman6);
+            }
+            else if (Level == 7)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman6);
+                Losses++;
+                
+            }
+
+
+
+        }
+
         private void LoadWords()
         {
 
+            //public void LoadWords()
+            //{
+            //    Random r = new Random();
 
-            var word = "anxiety".ToUpper();
+            //    string[] words = { "man", "rat", "cow", "chicken" };
+
+            //    Console.WriteLine(words[r.Next(0, words.Length)]);
+
+            //    var assets = Assets;
+
+            //    using (var sr = new StreamReader(assets.Open("hangmanwords.txt")))
+            //    {
+            //        while (!sr.EndOfStream)
+            //        {
+            //            var text = sr.ReadLine();
+
+            //        }
+
+
+            //    }
+
+            Random r = new Random();
+
+            string[] words = { "anxiety", "Monster", "Chicken", "Lemonade".ToUpper() };
+
+           // Console.WriteLine(words[r.Next(0, words.Length)]);
+
+            var word = words[r.Next(0, words.Length)];
 
             char[] WordArray = new char[word.Length];
 
-            WordArray = word.ToArray();
+            //WordArray = words.ToArray();
             Words.Word = WordArray;
 
             char[] WordGuessArray;
