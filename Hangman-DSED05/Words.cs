@@ -19,11 +19,13 @@ namespace Hangman_DSED05
 
         public static char[] Word { get; set; }
 
-        public string word { get; set; }
+        public static string word { get; set; }
 
         public string wordguess { get; set; }
 
         public int Level { get; set; }
+
+        public static string TheWord { get; set; }
     }
 
 

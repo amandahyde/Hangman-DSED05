@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -7,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 
@@ -50,6 +52,11 @@ namespace Hangman_DSED05
 
         public int Level = 0;
         public int Losses = 0;
+
+        public int Count = 0;
+
+        List<string> WordList = new List<string>();
+    
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -152,8 +159,6 @@ namespace Hangman_DSED05
 
                     }
 
-
-
                     //if (Words.Word.Contains(fakeBtn.Text.ToString())
                //     METHOD
                     //        {
@@ -161,25 +166,27 @@ namespace Hangman_DSED05
                     //}
                     else
                     {
-                        ChangeImage();
+                    ChangeImage();
                         
+
+
                     }
 
 
-                       
-                   
-    
+
+                    WordToGuess();
+
+
 
 
                 }
 
-                WordToGuess();
+
                 fakeBtn.Enabled = false;
             }
 
 
-
-
+         
 
             //if (fakeBtn.Text == copycurrentword)
             //{ Toast.MakeText(this, "!!! " + Name, ToastLength.Long).Show(); }
@@ -235,58 +242,85 @@ namespace Hangman_DSED05
         private void LoadWords()
         {
 
-            //public void LoadWords()
-            //{
-            //    Random r = new Random();
+            var assets = Assets;
 
-            //    string[] words = { "man", "rat", "cow", "chicken" };
-
-            //    Console.WriteLine(words[r.Next(0, words.Length)]);
-
-            //    var assets = Assets;
-
-            //    using (var sr = new StreamReader(assets.Open("hangmanwords.txt")))
-            //    {
-            //        while (!sr.EndOfStream)
-            //        {
-            //            var text = sr.ReadLine();
-
-            //        }
-
-
-            //    }
-
-            Random r = new Random();
-
-            string[] words = { "anxiety", "Monster", "Chicken", "Lemonade".ToUpper() };
-
-           // Console.WriteLine(words[r.Next(0, words.Length)]);
-
-            var word = words[r.Next(0, words.Length)];
-
-            char[] WordArray = new char[word.Length];
-
-            //WordArray = words.ToArray();
-            Words.Word = WordArray;
-
-            char[] WordGuessArray;
-
-            string copycurrentword = "";
-
-            foreach (char letter in Words.Word)
-
+            using (var sr = new StreamReader(assets.Open("hangmanwords.txt")))
             {
-                copycurrentword += "_";
+                while (!sr.EndOfStream)
+                {
+                    var text = sr.ReadLine();
+
+
+                    if (text != string.Empty && text.Length > 4) //ignore empty lines or words less than 4 letters
+                    {
+                        text = text.Trim();
+
+
+
+                        var word = text;
+
+                        word = word.Trim();
+
+                        //cut out the stuff you don't want
+
+                        if (!WordList.Contains(word))
+                        {
+
+                            WordList.Add(word);
+                        }
+                    }
+
+                  
+                }
+
+                Random rand = new Random();
+              
+
+                int RndNumber = rand.Next(1, WordList.Count);
+
+
+                Words.TheWord = WordList[RndNumber];
+
+                //var words =  "anxiety".ToUpper() ;
+
+                // Console.WriteLine(words[r.Next(0, words.Length)]);
+
+                //var word = words[r.Next(0, words.Length)];
+
+                char[] WordArray = new char[Words.TheWord.Length];
+
+
+
+
+                WordArray = Words.TheWord.ToArray();
+                Words.Word = WordArray;
+
+
+
+                char[] WordGuessArray;
+
+                string copycurrentword = "";
+
+                foreach (char letter in Words.Word)
+
+                {
+                    copycurrentword += "_";
+                }
+
+                //Toast.MakeText(this, , ToastLength.Long).Show();
+
+                WordGuessArray = copycurrentword.ToArray();
+
+                Words.WordGuess = WordGuessArray;
+
+                WordToGuess();
+
             }
 
-            WordGuessArray = copycurrentword.ToArray();
-
-            Words.WordGuess = WordGuessArray;
-
-            WordToGuess();
 
         }
 
+   
         private void WordToGuess()
 
         {
