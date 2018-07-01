@@ -140,8 +140,8 @@ namespace Hangman_DSED05
        public void letter_Click(object sender, EventArgs e)
         {
 
-       
-           
+      
+
             //make a fake button
             Button fakeBtn = (Button)sender;
 
@@ -153,29 +153,73 @@ namespace Hangman_DSED05
                 {
                     var Letter = Words.Word[i];
 
-                    if (Letter.ToString() == fakeBtn.Text.ToString())
+                
+
+
+                    if (Letter.ToString().ToUpper() == fakeBtn.Text.ToUpper().ToString())
                 {
                         Words.WordGuess[i] = (char)Letter;
 
                     }
 
                     //if (Words.Word.Contains(fakeBtn.Text.ToString())
-               //     METHOD
+                    //     METHOD
                     //        {
 
-                    //}
+              
                     else
                     {
-                    ChangeImage();
-                        
+
+
+                        //ChangeImage();
+
+                        Level++;
+
+                        if (Level == 1)
+
+                        {
+                            imgDoom.SetImageResource(Resource.Drawable.hangmanstart);
+                        }
+
+                        else if (Level == 2)
+
+
+                        {
+                            imgDoom.SetImageResource(Resource.Drawable.hangman2);
+                        }
+
+                        else if (Level == 3)
+                        {
+                            imgDoom.SetImageResource(Resource.Drawable.hangman3);
+                        }
+
+                        else if (Level == 4)
+                        {
+                            imgDoom.SetImageResource(Resource.Drawable.hangman4);
+                        }
+
+                        else if (Level == 5)
+                        {
+                            imgDoom.SetImageResource(Resource.Drawable.hangman5);
+                        }
+                        else if (Level == 6)
+                        {
+                            imgDoom.SetImageResource(Resource.Drawable.hangman6);
+                        }
+                        else if (Level == 7)
+                        {
+                            imgDoom.SetImageResource(Resource.Drawable.hangmanend);
+                            Losses++;
+
+                        }
 
 
                     }
 
 
 
-                    WordToGuess();
 
+                    WordToGuess();
 
 
 
@@ -192,52 +236,56 @@ namespace Hangman_DSED05
             //{ Toast.MakeText(this, "!!! " + Name, ToastLength.Long).Show(); }
         }
 
-
-        public void ChangeImage()
-        {
-            Level++;
-
-            if (Level == 1)
-
-            {
-                imgDoom.SetImageResource(Resource.Drawable.hangmanstart);
-            }
-
-            else if (Level == 2)
+    
 
 
-            {
-                imgDoom.SetImageResource(Resource.Drawable.hangman2);
-            }
+        //public void ChangeImage()
+        //{
 
-            else if (Level == 3)
-            {
-                imgDoom.SetImageResource(Resource.Drawable.hangman3);
-            }
+        //    Level++;
 
-            else if (Level == 4)
-            {
-                imgDoom.SetImageResource(Resource.Drawable.hangman4);
-            }
+        //    if (Level == 1)
 
-            else if (Level == 5)
-            {
-                imgDoom.SetImageResource(Resource.Drawable.hangman5);
-            }
-            else if (Level == 6)
-            {
-                imgDoom.SetImageResource(Resource.Drawable.hangman6);
-            }
-            else if (Level == 7)
-            {
-                imgDoom.SetImageResource(Resource.Drawable.hangman6);
-                Losses++;
+        //    {
+        //        imgDoom.SetImageResource(Resource.Drawable.hangmanstart);
+        //    }
+
+        //    else if (Level == 2)
+
+
+        //    {
+        //        imgDoom.SetImageResource(Resource.Drawable.hangman2);
+        //    }
+
+        //    else if (Level == 3)
+        //    {
+        //        imgDoom.SetImageResource(Resource.Drawable.hangman3);
+        //    }
+
+        //    else if (Level == 4)
+        //    {
+        //        imgDoom.SetImageResource(Resource.Drawable.hangman4);
+        //    }
+
+        //    else if (Level == 5)
+        //    {
+        //        imgDoom.SetImageResource(Resource.Drawable.hangman5);
+        //    }
+        //    else if (Level == 6)
+        //    {
+        //        imgDoom.SetImageResource(Resource.Drawable.hangman6);
+        //    }
+        //    else if (Level == 7)
+        //    {
+        //        imgDoom.SetImageResource(Resource.Drawable.hangman6);
+        //        Losses++;
                 
-            }
+        //    }
 
 
 
-        }
+        //}
+ 
 
         private void LoadWords()
         {
@@ -281,11 +329,7 @@ namespace Hangman_DSED05
 
                 Words.TheWord = WordList[RndNumber];
 
-                //var words =  "anxiety".ToUpper() ;
-
-                // Console.WriteLine(words[r.Next(0, words.Length)]);
-
-                //var word = words[r.Next(0, words.Length)];
+        
 
                 char[] WordArray = new char[Words.TheWord.Length];
 
@@ -293,6 +337,7 @@ namespace Hangman_DSED05
 
 
                 WordArray = Words.TheWord.ToArray();
+
                 Words.Word = WordArray;
 
 
