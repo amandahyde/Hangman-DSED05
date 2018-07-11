@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Hangman_DSED05
 {
-    class Words
+ public static  class Words
     {
 
         public static char[] WordGuess { get; set; }
@@ -21,11 +21,18 @@ namespace Hangman_DSED05
 
         public static string word { get; set; }
 
-        public string wordguess { get; set; }
+        public static string wordguess { get; set; }
 
-        public int Level { get; set; }
+        public static int Level { get; set; }
 
         public static string TheWord { get; set; }
+
+        public static int Losses { get; set; }
+        
+        public static int Wins { get; set; }
+
+        public static int Letter { get; set; }
+
     }
 
 

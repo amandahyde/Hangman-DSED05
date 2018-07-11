@@ -50,13 +50,14 @@ namespace Hangman_DSED05
 
         private TextView ShowWord;
 
-        public int Level = 0;
-        public int Losses = 0;
+       
 
+        public int Level = 0;
+    
         public int Count = 0;
 
         List<string> WordList = new List<string>();
-    
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -137,155 +138,138 @@ namespace Hangman_DSED05
 
         }
 
-       public void letter_Click(object sender, EventArgs e)
+        public void letter_Click(object sender, EventArgs e)
         {
-
-      
-
+            bool IsNoMatchedLetter = true;
             //make a fake button
             Button fakeBtn = (Button)sender;
 
             if (fakeBtn.Clickable)
-
             {
-
+                //letter exists 
                 for (int i = 0; i < Words.Word.Length; i++)
                 {
                     var Letter = Words.Word[i];
-
-                
-
-
+                    
                     if (Letter.ToString().ToUpper() == fakeBtn.Text.ToUpper().ToString())
-                {
-                        Words.WordGuess[i] = (char)Letter;
-
-                    }
-
-                    //if (Words.Word.Contains(fakeBtn.Text.ToString())
-                    //     METHOD
-                    //        {
-
-              
-                    else
                     {
+                        Words.WordGuess[i] = (char)Letter;
+                        IsNoMatchedLetter = false;
+                        Words.Letter = Words.Letter - 1;
 
-
-                        //ChangeImage();
-
-                        Level++;
-
-                        if (Level == 1)
-
-                        {
-                            imgDoom.SetImageResource(Resource.Drawable.hangmanstart);
-                        }
-
-                        else if (Level == 2)
-
-
-                        {
-                            imgDoom.SetImageResource(Resource.Drawable.hangman2);
-                        }
-
-                        else if (Level == 3)
-                        {
-                            imgDoom.SetImageResource(Resource.Drawable.hangman3);
-                        }
-
-                        else if (Level == 4)
-                        {
-                            imgDoom.SetImageResource(Resource.Drawable.hangman4);
-                        }
-
-                        else if (Level == 5)
-                        {
-                            imgDoom.SetImageResource(Resource.Drawable.hangman5);
-                        }
-                        else if (Level == 6)
-                        {
-                            imgDoom.SetImageResource(Resource.Drawable.hangman6);
-                        }
-                        else if (Level == 7)
-                        {
-                            imgDoom.SetImageResource(Resource.Drawable.hangmanend);
-                            Losses++;
-
-                        }
-
-
+                   
+                        
                     }
 
+                    
+                   
 
-
+                                 
 
                     WordToGuess();
+                    //Toast.MakeText(this, Words.Word.ToString(), ToastLength.Long).Show(); 
 
+                    //if (Letter.ToString().ToUpper() != fakeBtn.Text.ToUpper().ToString())
+                    //{
+                    //    Level++;
+
+                    //}
 
 
                 }
 
 
+                if (IsNoMatchedLetter == true)
+                {
+                    Level++;
+                    ChangeImage();
+                }
                 fakeBtn.Enabled = false;
+
+                //if (Words.Letter == 0)
+
+                //{
+                //    Words.Wins++;
+                //    FinishGame();
+                //}
+
+
             }
 
 
-         
 
             //if (fakeBtn.Text == copycurrentword)
             //{ Toast.MakeText(this, "!!! " + Name, ToastLength.Long).Show(); }
         }
 
-    
+
+      
 
 
-        //public void ChangeImage()
-        //{
-
-        //    Level++;
-
-        //    if (Level == 1)
-
-        //    {
-        //        imgDoom.SetImageResource(Resource.Drawable.hangmanstart);
-        //    }
-
-        //    else if (Level == 2)
-
-
-        //    {
-        //        imgDoom.SetImageResource(Resource.Drawable.hangman2);
-        //    }
-
-        //    else if (Level == 3)
-        //    {
-        //        imgDoom.SetImageResource(Resource.Drawable.hangman3);
-        //    }
-
-        //    else if (Level == 4)
-        //    {
-        //        imgDoom.SetImageResource(Resource.Drawable.hangman4);
-        //    }
-
-        //    else if (Level == 5)
-        //    {
-        //        imgDoom.SetImageResource(Resource.Drawable.hangman5);
-        //    }
-        //    else if (Level == 6)
-        //    {
-        //        imgDoom.SetImageResource(Resource.Drawable.hangman6);
-        //    }
-        //    else if (Level == 7)
-        //    {
-        //        imgDoom.SetImageResource(Resource.Drawable.hangman6);
-        //        Losses++;
-                
-        //    }
+    private void ChangeImage()
+        {
 
 
 
-        //}
- 
+            if (Level == 1)
+
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangmanstart);
+            }
+
+            else if (Level == 2)
+
+
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman2);
+            }
+
+            else if (Level == 3)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman3);
+            }
+
+            else if (Level == 4)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman4);
+            }
+
+            else if (Level == 5)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman5);
+            }
+            else if (Level == 6)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangman6);
+            }
+            else if (Level == 7)
+            {
+                imgDoom.SetImageResource(Resource.Drawable.hangmanend);
+                Words.Losses++;
+                Toast.MakeText(this, "You Lose", ToastLength.Long).Show();
+           
+               
+
+                txtMessage.Text = Words.Losses.ToString();
+
+                FinishGame();
+            }
+
+       
+        }
+
+        private void FinishGame()
+        {
+
+            //create an intent to move data to the other activity.
+            var mainActivity = new Intent(this, typeof(MainActivity));
+       
+
+            //start game activity
+            StartActivity(mainActivity);
+        }
+
+      
 
         private void LoadWords()
         {
@@ -318,18 +302,18 @@ namespace Hangman_DSED05
                         }
                     }
 
-                  
+
                 }
 
                 Random rand = new Random();
-              
+
 
                 int RndNumber = rand.Next(1, WordList.Count);
 
 
                 Words.TheWord = WordList[RndNumber];
 
-        
+
 
                 char[] WordArray = new char[Words.TheWord.Length];
 
@@ -350,6 +334,7 @@ namespace Hangman_DSED05
 
                 {
                     copycurrentword += "_";
+                    Words.Letter++;
                 }
 
                 //Toast.MakeText(this, , ToastLength.Long).Show();
@@ -365,12 +350,12 @@ namespace Hangman_DSED05
 
         }
 
-   
+
         private void WordToGuess()
 
         {
-            ShowWord.Text = new string (Words.WordGuess);
-
+            ShowWord.Text = new string(Words.WordGuess);
+            //Toast.MakeText(this, Words.Word.ToString(), ToastLength.Long).Show();
         }
 
         private void ReplaceWithLetters()
@@ -378,13 +363,13 @@ namespace Hangman_DSED05
 
         {
 
-            
-         
+
+
 
         }
 
 
-   
+
     }
 
 }

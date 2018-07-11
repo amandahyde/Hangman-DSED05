@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Hangman_DSED05
 {
-    [Activity(Label = "Hangman_DSED05", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Hangman_DSED05", MainLauncher = true,  Icon = "@drawable/noose", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
         private Button btnNext;
