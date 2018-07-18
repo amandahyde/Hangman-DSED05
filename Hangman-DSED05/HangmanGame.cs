@@ -50,10 +50,10 @@ namespace Hangman_DSED05
 
         private TextView ShowWord;
 
-       
+
 
         public int Level = 0;
-    
+
         public int Count = 0;
 
         List<string> WordList = new List<string>();
@@ -63,14 +63,14 @@ namespace Hangman_DSED05
         {
             base.OnCreate(savedInstanceState);
 
+            //set game layout
             SetContentView(Resource.Layout.Game);
-            // Create your application here
-
+          
+            Words.Letter = 0;
             Name = Intent.GetStringExtra("Name");
 
             txtMessage = FindViewById<TextView>(Resource.Id.txtMessage);
-            //txtMessage.Text = "Welcome to the game " + Name;
-            //Toast.MakeText(this, "You are " + Name, ToastLength.Long).Show();
+         
 
             ShowWord = FindViewById<TextView>(Resource.Id.lblShowWord);
 
@@ -150,63 +150,58 @@ namespace Hangman_DSED05
                 for (int i = 0; i < Words.Word.Length; i++)
                 {
                     var Letter = Words.Word[i];
-                    
+
+
+                    //if letter is equal to button
                     if (Letter.ToString().ToUpper() == fakeBtn.Text.ToUpper().ToString())
                     {
                         Words.WordGuess[i] = (char)Letter;
                         IsNoMatchedLetter = false;
                         Words.Letter = Words.Letter - 1;
 
-                   
-                        
+
+
                     }
 
-                    
-                   
 
-                                 
 
                     WordToGuess();
-                    //Toast.MakeText(this, Words.Word.ToString(), ToastLength.Long).Show(); 
-
-                    //if (Letter.ToString().ToUpper() != fakeBtn.Text.ToUpper().ToString())
-                    //{
-                    //    Level++;
-
-                    //}
-
+              
 
                 }
 
-
+                //if letter is not equal to button pressed
                 if (IsNoMatchedLetter == true)
                 {
                     Level++;
+
                     ChangeImage();
                 }
                 fakeBtn.Enabled = false;
+     
 
-                //if (Words.Letter == 0)
+                //
+                if (Words.Letter == 0)
 
-                //{
-                //    Words.Wins++;
-                //    FinishGame();
-                //}
+                {
+                    Words.Wins++;
+                    Toast.MakeText(this, "You win!", ToastLength.Long).Show();
+                    FinishGame();
+                }
 
 
             }
 
 
 
-            //if (fakeBtn.Text == copycurrentword)
-            //{ Toast.MakeText(this, "!!! " + Name, ToastLength.Long).Show(); }
+      
         }
 
 
-      
 
 
-    private void ChangeImage()
+        //change the image every day the button pressed does not equal the letter
+        private void ChangeImage()
         {
 
 
@@ -242,20 +237,23 @@ namespace Hangman_DSED05
             {
                 imgDoom.SetImageResource(Resource.Drawable.hangman6);
             }
+
+            //final level - calculate loss if level 7 is reached
             else if (Level == 7)
             {
                 imgDoom.SetImageResource(Resource.Drawable.hangmanend);
                 Words.Losses++;
                 Toast.MakeText(this, "You Lose", ToastLength.Long).Show();
-           
-               
+
+
 
                 txtMessage.Text = Words.Losses.ToString();
 
+                //game over
                 FinishGame();
             }
 
-       
+
         }
 
         private void FinishGame()
@@ -263,19 +261,23 @@ namespace Hangman_DSED05
 
             //create an intent to move data to the other activity.
             var mainActivity = new Intent(this, typeof(MainActivity));
-       
+
 
             //start game activity
             StartActivity(mainActivity);
         }
 
-      
+
 
         private void LoadWords()
         {
 
+
+            //load words from txt file
             var assets = Assets;
 
+
+            //open the file and read
             using (var sr = new StreamReader(assets.Open("hangmanwords.txt")))
             {
                 while (!sr.EndOfStream)
@@ -305,6 +307,8 @@ namespace Hangman_DSED05
 
                 }
 
+
+                //select random word
                 Random rand = new Random();
 
 
@@ -313,7 +317,7 @@ namespace Hangman_DSED05
 
                 Words.TheWord = WordList[RndNumber];
 
-
+            
 
                 char[] WordArray = new char[Words.TheWord.Length];
 
@@ -330,6 +334,8 @@ namespace Hangman_DSED05
 
                 string copycurrentword = "";
 
+
+                //replace each letter in the word with _ for displaying on game screen
                 foreach (char letter in Words.Word)
 
                 {
@@ -337,7 +343,7 @@ namespace Hangman_DSED05
                     Words.Letter++;
                 }
 
-                //Toast.MakeText(this, , ToastLength.Long).Show();
+              
 
                 WordGuessArray = copycurrentword.ToArray();
 
@@ -355,18 +361,12 @@ namespace Hangman_DSED05
 
         {
             ShowWord.Text = new string(Words.WordGuess);
-            //Toast.MakeText(this, Words.Word.ToString(), ToastLength.Long).Show();
-        }
-
-        private void ReplaceWithLetters()
-
-
-        {
-
 
 
 
         }
+
+
 
 
 

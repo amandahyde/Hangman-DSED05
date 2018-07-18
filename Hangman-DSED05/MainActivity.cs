@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Hangman_DSED05
 {
-    [Activity(Label = "Hangman_DSED05", MainLauncher = true,  Icon = "@drawable/noose", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Hangman_DSED05", MainLauncher = true, Icon = "@drawable/noose", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
         private Button btnNext;
@@ -47,7 +47,8 @@ namespace Hangman_DSED05
 
             btnNext.Click += onNext_Click;
 
-
+            Toast.MakeText(this, "Won " + Words.Wins, ToastLength.Long).Show();
+            Toast.MakeText(this, "Lost " + Words.Losses, ToastLength.Long).Show();
 
 
         }
@@ -56,7 +57,7 @@ namespace Hangman_DSED05
         {
 
             //toast check to see its working
-            Toast.MakeText(this, "Your name is " + txtName.Text, ToastLength.Long).Show();
+
 
             //create an intent to move data to the other activity.
             var gameActivity = new Intent(this, typeof(HangmanGame));
@@ -66,10 +67,7 @@ namespace Hangman_DSED05
             StartActivity(gameActivity);
         }
 
-       
-        }
 
     }
 
-
-
+}
